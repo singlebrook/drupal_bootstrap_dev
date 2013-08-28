@@ -29,6 +29,16 @@ function drupal_bootstrap_dev_init() {
 }
 
 /**
+ * Implements hook_custom_theme()
+ */
+function drupal_bootstrap_dev_custom_theme() {
+  // Allow the user to request a particular theme via a query parameter.
+  if (isset($_GET['theme'])) {
+    return $_GET['theme'];
+  }
+}
+
+/**
  * Implements hook_css_alter().
  *
  * Force CSS to be added with link tags, rather than @import. Makes livereload work better.
