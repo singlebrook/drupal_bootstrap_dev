@@ -3,7 +3,7 @@
 /**
  * Implements hook_enable()
  */
-function drupal_bootstrap_dev_enable() {
+function drupal_streamline_dev_enable() {
   // Redirect all outgoing mail to the local filesystem
   variable_set('mail_system', array('default-system' => 'DevelMailLog'));
 }
@@ -11,7 +11,7 @@ function drupal_bootstrap_dev_enable() {
 /**
  * Implements hook_disable()
  */
-function drupal_bootstrap_dev_disable() {
+function drupal_streamline_dev_disable() {
   // Stop redirecting all outgoing mail
   variable_set('mail_system', array('default-system' => 'DefaultMailSystem'));
 }
@@ -19,6 +19,6 @@ function drupal_bootstrap_dev_disable() {
 /**
  * Implements hook_uninstall()
  */
-function drupal_bootstrap_dev_uninstall() {
-  variable_del('drupal_bootstrap_dev_use_livereload');
+function drupal_streamline_dev_uninstall() {
+  variable_del('drupal_streamline_dev_use_livereload');
 }

@@ -1,4 +1,4 @@
-name = Drupal Bootstrap Development
+name = Drupal Streamline Development
 description = Container for development utilities
 core = 7.x
 hidden = TRUE
@@ -9,4 +9,3 @@ version = 7.x-1.0
 dependencies[] = devel
 dependencies[] = diff
 dependencies[] = field_ui
-dependencies[] = context_ui
