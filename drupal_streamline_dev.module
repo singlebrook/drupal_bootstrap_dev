@@ -9,24 +9,18 @@
  * Adds the livereload javascript so we don't need the browser extension.
  */
 function drupal_streamline_dev_init() {
+  // The guard-livereload gem includes a copy of the livereload.js script at the same
+  // port configured in the livereload guard in the Guardfile
+  // Other livereload options available: &mindelay=1000&maxdelay=60000
+  $guard_livereload_js_uri = 'http://localhost:35777/livereload.js?host=localhost&port=35777&snipver=1';
 
-  if (!variable_get('drupal_streamline_dev_use_livereload')) {
-    return;
+  // Try to request the guard copy of livereload
+  $guard_livereload_js = drupal_http_request($guard_livereload_js_uri);
+
+  // If there is a copy, guard is running and we should add the livereload.js script
+  if ($guard_livereload_js->code == 200) {
+    drupal_add_js($guard_livereload_js_uri, array('type' => 'external', 'scope' => 'footer'));
   }
-
-  global $base_url;
-
-  // TODO: Use the version of livereload.js included with guard-livereload
-  $output = $base_url . '/';
-  $output .= drupal_get_path('module', 'drupal_streamline_dev') . '/livereload.js?';
-//  $output .= 'host=' . parse_url($base_url, PHP_URL_HOST);
-  $output .= 'host=' . 'localhost';
-  $output .= '&port=' . 35777; // Different port than the default livereload.
-  $output .= '&snipver=' . 1;
-  $output .= '&mindelay' . 1000;
-  $output .= '&maxdelay' . 60000;
-
-  drupal_add_js($output, 'external');
 }
 
 /**
